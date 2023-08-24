@@ -1,0 +1,32 @@
+body{
+	margin: 1rem 0;
+	background-color: #edededee;
+}
+
+h2{
+	margin: 0;
+}
+
+.content{
+	margin: auto;
+	border: #a4a3a3 1px solid;
+    border-radius: 1rem;
+    padding: 40px;
+    background-color: #fff;
+    width: fit-content;
+    min-width: 500px;
+    filter: drop-shadow(2px 6px 6px #949494);
+}
+
+.item-list{
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.item{
+	display: block;
+	padding: 2rem;
+    border: #ebebeb solid 1px;
+    border-radius: 0.5rem;
+}
