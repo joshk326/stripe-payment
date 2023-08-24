@@ -10,22 +10,71 @@
 			<hr>
 			<div class="item-list">
 				<div class="item">
-					<h2>Book</h2>
-					<select>
-						<option>Harry Potter</option>
-						<option>Hunger Games</option>
-					</select>
-					<button>Continue to Checkout</button>
-				</div>
-				<div class="item">
-					<h2>Car</h2>
-					<button>Continue to Checkout</button>
-				</div>
-				<div class="item">
-					<h2>Phone</h2>
-					<button>Continue to Checkout</button>
+					<form action="checkout.php" method="post">
+						<h2>Book</h2>
+						<select name="book-title" id="book">
+							<option value="" disabled selected>Select Book</option>
+							<option value="Harry_Potter">Harry Potter and the Sorcerer's Stone</option>
+							<option value="Hunger_Games">The Hunger Games</option>
+						</select>
+						<select name="book-cover" id="cover">
+							<option value="" disabled selected>Select Book Cover Type</option>
+							<option value="Hardback">Hardback</option>
+							<option value="Paperback">Paperback</option>
+						</select>
+						<input type="number" name="book-quantity" id="quantity" placeholder="Quantity" min="1" max="100"/>
+						<hr width="100%">
+						<input type="text" name="name" placeholder="Name" maxlength="100"/>
+						<input type="text" name="email" placeholder="Email" maxlength="100"/>
+						<h3>Total: $<span id="total-amount">0</span></h3>
+						<input type="hidden" name="product" value="book" />
+						<button class="btn">Continue to Checkout</button>
+					</form>
+					<span id="error-msg"></span>
 				</div>
 			</div>
 		</div>
+
+		<script>
+			var bookTitle = document.getElementById("book");
+			var bookCover = document.getElementById("cover");
+			var bookQuantity = document.getElementById("quantity");
+			var totalAmount = document.getElementById("total-amount");
+			var errorMsg = document.getElementById("error-msg");
+			var name = document.getElementById("name");
+			var email = document.getElementById("email");
+			var form = document.querySelector("form");
+			
+			form.addEventListener("submit", validateForm);
+			bookTitle.addEventListener("change", updateTotal);
+			bookCover.addEventListener("change", updateTotal);
+			bookQuantity.addEventListener("change", updateTotal);
+			
+			function updateTotal(){
+				if(bookTitle.value == "Harry_Potter" && bookCover.value == "Hardback" && bookQuantity.value > 0){
+				totalAmount.innerHTML = 15 * bookQuantity.value;
+				}else if(bookTitle.value == "Harry_Potter" && bookCover.value == "Paperback" && bookQuantity.value > 0){
+					totalAmount.innerHTML = 6 * bookQuantity.value;
+				}else if(bookTitle.value == "Hunger_Games" && bookCover.value == "Hardback" && bookQuantity.value > 0){
+					totalAmount.innerHTML = 12 * bookQuantity.value;
+				}else if(bookTitle.value == "Hunger_Games" && bookCover.value == "Paperback" && bookQuantity.value > 0){
+					totalAmount.innerHTML = 9 * bookQuantity.value;
+				}else{
+					totalAmount.innerHTML = 0;
+				}
+			}
+			
+			function validateForm(){
+				if(bookTitle.value == "" || bookCover.value == "" || bookQuantity.value == "" || name.value == "" || email.value == ""){
+					errorMsg.innerHTML = "Please fill out all fields";
+					event.preventDefault();
+				}else if(bookQuantity.value < 1 || bookQuantity.value > 100){
+					errorMsg.innerHTML = "Please enter a valid quantity";
+					event.preventDefault();
+				} else{
+					errorMsg.innerHTML = "";
+				}
+			}
+		</script>
 	</body>
 </html>

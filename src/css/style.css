@@ -7,10 +7,24 @@ h2{
 	margin: 0;
 }
 
+form{
+	display: flex;
+	flex-direction: column;
+	gap: .75rem;
+}
+
+select, input{
+	padding: 0.5rem;
+}
+
+button{
+	padding: 1rem;
+}
+
 .content{
 	margin: auto;
 	border: #a4a3a3 1px solid;
-    border-radius: 1rem;
+    border-radius: 0.25rem;
     padding: 40px;
     background-color: #fff;
     width: fit-content;
@@ -25,8 +39,14 @@ h2{
 }
 
 .item{
+	background-color: #fff;
 	display: block;
 	padding: 2rem;
     border: #ebebeb solid 1px;
-    border-radius: 0.5rem;
+    border-radius: 0.15rem;
+	filter: drop-shadow(0px 3px 3px #949494);
+}
+
+.item:hover{
+	filter: drop-shadow(2px 11px 5px #949494);
 }

@@ -2,31 +2,27 @@
 	require_once( __DIR__ . '/includes/stripe-php/init.php' );
 
 	if(isset($_POST['product'])){
-		$type = $_POST['product'];
+		$product = $_POST['product'];
 		$amount = 0;
-		switch($type){
+		//Can use a switch case to handle multiple products
+		//You can setup multiple intents depending on the selected product
+		switch($product){
 			case 'book':
-				if(isset($_POST['fname']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['tickets'])){
-					require_once(__DIR__ .'/includes/book_intent.php');
-					$amount = 15 * $_POST['tickets'];
-				}else{
-					http_response_code(400);
-				}
-				
-				break;
-			case 'car':
-				if(isset($_POST['fname']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['make']) && isset($_POST['model']) && isset($_POST['year']) && isset($_POST['color'])){
-					require_once(__DIR__ .'/includes/car_intent.php');
-					$amount = 18000;
-				}
-				else{
-					http_response_code(400);
-				}
-				break;
-			case 'phone':
-				if(isset($_POST['fname']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['phone-model'])){
-					require_once(__DIR__ .'/includes/phone_intent.php');
-					$amount = 1200;
+				if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['book-title']) && isset($_POST['book-cover']) && isset($_POST['book-quantity'])){
+					require_once(__DIR__ .'/includes/intent.php');
+
+					$book_title = $_POST['book-title'];
+					$book_cover = $_POST['book-cover'];
+					$book_quantity = $_POST['book-quantity'];
+					if($book_title == "Harry_Potter" && $book_cover == "Hardback" && $book_quantity > 0){
+						$amount = 15 * $book_quantity;
+					}else if($book_title == "Harry_Potter" && $book_cover == "Paperback" && $book_quantity > 0){
+						$amount = 6 * $book_quantity;
+					}else if($book_title == "Hunger_Games" && $book_cover == "Hardback" && $book_quantity > 0){
+						$amount = 12 * $book_quantity;
+					}else if($book_title == "Hunger_Games" && $book_cover == "Paperback" && $book_quantity > 0){
+						$amount = 9 * $book_quantity;
+					}
 				}else{
 					http_response_code(400);
 				}
@@ -45,13 +41,13 @@
 	</head>
 	<body>
 		<div class="content">
-			<form id="payment-form" class="box checkout-box" data-secret="<?= $intent->client_secret ?>">
+			<form id="payment-form" data-secret="<?= $intent->client_secret ?>">
 			  <h1>Total: $<span id="total-amount"><?echo $amount?></span></h1>
 			  <div id="payment-element">
 			    <!-- Elements will create form elements here -->
 			  </div>
 			  <br>
-			  <button id="submit" class="btn pay-btn">Submit</button>
+			  <button id="submit">Submit</button>
 			  <p style="width: 226px; padding: 10px 0">By submitting your payment you agree to these <a href="javascript:void(0);" id="terms" class="terms">terms and conditions</a></p>
 			</form>
 		</div>

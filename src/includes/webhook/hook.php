@@ -1,4 +1,12 @@
 <?php
+//This webhook listens for the payment_intent.succeeded event
+//You can use this to handle the payment intent after the payment is successful
+//You can use the metadata to store information about the payment
+//To setup a webhook, go to your Stripe dashboard and click on the 'Developers' tab
+//Then click on 'Webhooks' and click on 'Add endpoint'
+//Enter the URL of this file and select the 'payment_intent.succeeded' event
+//You can also add a secret signing key to verify the webhook
+
 require_once( __DIR__ . '/../stripe-php/init.php');
 
 \Stripe\Stripe::setApiKey('<<YOUR SECRET KEY>>');

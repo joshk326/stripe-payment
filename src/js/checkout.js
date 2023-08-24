@@ -24,7 +24,7 @@ form.addEventListener('submit', async (event) => {
 
   const {error} = await stripe.confirmPayment({
     elements,
-    confirmParams: {
+    confirmParams: { //if payment processing is successful then redirect to success.html
       return_url: 'https://<<YOUR DOMAIN>>/success.html',
     },
   });
