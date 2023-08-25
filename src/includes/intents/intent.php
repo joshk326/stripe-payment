@@ -24,6 +24,7 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['book-title']
     'amount' => $amount,
     'currency' => 'usd',
     'automatic_payment_methods' => ['enabled' => true],
+    'receipt_email' => $email,
     'metadata' => array(
       'name' => $name,
       'email' => $email,

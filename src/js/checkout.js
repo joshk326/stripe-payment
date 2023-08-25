@@ -9,7 +9,7 @@ const stripe = Stripe( '<<YOUR PUBLIC KEY>>' );
 
 const options = {
   clientSecret: form.getAttribute('data-secret'),
-  appearance: {/*...*/},
+  appearance: {/*Vist https://stripe.com/docs/elements/appearance-api for more details on how to customize your payment form*/},
 };
 
 const elements = stripe.elements(options);

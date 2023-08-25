@@ -9,7 +9,7 @@
 		switch($product){
 			case 'book':
 				if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['book-title']) && isset($_POST['book-cover']) && isset($_POST['book-quantity'])){
-					require_once(__DIR__ .'/includes/intent.php');
+					require_once(__DIR__ .'/includes/intents/intent.php');
 
 					$book_title = $_POST['book-title'];
 					$book_cover = $_POST['book-cover'];
